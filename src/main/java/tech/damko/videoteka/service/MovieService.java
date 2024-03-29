@@ -8,7 +8,10 @@ import tech.damko.videoteka.model.Movie;
 import tech.damko.videoteka.repo.MovieRepo;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Stream;
 
 @Service
 public class MovieService {
@@ -43,9 +46,23 @@ public class MovieService {
     public List<Movie> loadMovies(String disc){
 
         ArrayList<Movie> movies = BusinessService.loadMovies(disc);
-        //TODO: Klic nove metode, ki iz seznama movies odstrani odvečne filme po ključu disk + ime filma na disku.
         for (Movie movie : movies){
-            movieRepo.save(movie);
+
+            boolean movieExists = false;
+            //Preveriti, da filem po ključu disk + ime filma na disku, še ne obstaja v bazi.
+            Optional<List<Movie>> moviesByName = movieRepo.findMovieByName(movie.getName());
+            Stream<Movie> stream = moviesByName.map(List::stream).orElse(Stream.empty());
+            Iterator<Movie> it = stream.iterator();
+            while (it.hasNext()) {
+                Movie m = it.next();
+                if(m.getDisc().equals(movie.getDisc())){
+                    movieExists = true;
+                    break;
+                }
+            }
+            if(!movieExists){
+                movieRepo.save(movie);
+            }
         }
         return movieRepo.findAll();
     }
