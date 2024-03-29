@@ -48,6 +48,12 @@ public class MovieResource {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    @DeleteMapping("/deleteMovieByDisc/{disc}")
+    public ResponseEntity<?> deleteMovieByDisc(@PathVariable("disc") String disc){
+        movieService.deleteMovieByDisc(disc);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
     @PostMapping("/load")
     public ResponseEntity<List<Movie>> loadMovies(@RequestBody String disc){
         List<Movie> movies = movieService.loadMovies(disc);

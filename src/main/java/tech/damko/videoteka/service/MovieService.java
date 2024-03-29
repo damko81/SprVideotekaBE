@@ -43,6 +43,18 @@ public class MovieService {
         movieRepo.deleteMovieById(id);
     }
 
+    @Transactional
+    public void deleteMovieByDisc(String disc){
+
+        Optional<List<Movie>> moviesByDisc = movieRepo.findMovieByDisc(disc+'\\');
+        Stream<Movie> stream = moviesByDisc.map(List::stream).orElse(Stream.empty());
+        Iterator<Movie> it = stream.iterator();
+        while (it.hasNext()) {
+            Movie m = it.next();
+            deleteMovie(m.getId());
+        }
+    }
+
     public List<Movie> loadMovies(String disc){
 
         ArrayList<Movie> movies = BusinessService.loadMovies(disc);
