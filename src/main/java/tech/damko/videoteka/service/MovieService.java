@@ -43,6 +43,7 @@ public class MovieService {
     public List<Movie> loadMovies(String disc){
 
         ArrayList<Movie> movies = BusinessService.loadMovies(disc);
+        //TODO: Klic nove metode, ki iz seznama movies odstrani odvečne filme po ključu disk + ime filma na disku.
         for (Movie movie : movies){
             movieRepo.save(movie);
         }
