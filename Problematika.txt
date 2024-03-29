@@ -1,0 +1,3 @@
+Videoteka TODO:
+
+1. Delovanje Multithreading_a. Izdelan razred Progress, kateri se kliče v novi niti. Kako se pravilno manipulira z nitmi v Javi?
