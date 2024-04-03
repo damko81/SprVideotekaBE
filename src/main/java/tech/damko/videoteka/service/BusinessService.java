@@ -35,7 +35,7 @@ public class BusinessService {
         return movies;
     }
 
-    public static ArrayList<Movie> doRequestDetailFromList(HashMap<String,HashMap<String,String>> movieRel,String disc) throws IOException, Exception{
+    public static ArrayList<Movie> doRequestDetailFromList(HashMap<String,HashMap<String,String>> movieRel,String disc) throws Exception{
 
         HashMap<String,HashMap<String,String>> movieDetails;
         ArrayList<Movie> movies = new ArrayList<Movie>();
@@ -194,7 +194,7 @@ public class BusinessService {
             while (it.hasNext()) {
                 Map.Entry pairs = (Map.Entry)it.next();
                 // Napolnemo filme z točnim imenom, če obstaja.
-                if(((String)pairs.getKey()).equals(i)){
+                if(pairs.getKey().equals(i)){
                     movieRelDistHS.put((String)pairs.getKey(),(String)pairs.getValue());
                 }// Sicer napolnemo vse z podobnim imenom.
                 else{
@@ -212,7 +212,7 @@ public class BusinessService {
         return movieRelDist;
     }
 
-    private static HashMap<String,HashMap<String,String>> doSearchRequestFromList(HashMap<String,String> list) throws IOException, Exception{
+    private static HashMap<String,HashMap<String,String>> doSearchRequestFromList(HashMap<String,String> list) throws Exception{
 
         HashMap<String,HashMap<String,String>> movieRef = new HashMap<String,HashMap<String,String>>();
 

@@ -1,4 +1,4 @@
-package tech.damko.videoteka;
+package tech.damko.videoteka.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -8,6 +8,7 @@ import tech.damko.videoteka.service.MovieService;
 
 import java.util.List;
 
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/movie")
 public class MovieResource {
