@@ -15,3 +15,10 @@ Ob prijavi z registriranim uporabnikom:
 Se odprejo razširjene možnosti videoteke:
 
 ![image](https://github.com/damko81/SprVideotekaBE/assets/162964541/93746def-02b0-4979-b1f8-16218c3a996c)
+
+Izberem možnost Load movies, kjer vpišemo direktorij z filmi.
+Filmi, ki so na izbranem direktoriju, se uvozijo v MSSqlServer14. Podatki o filmih se napolnejo preko IMDB parserja, ki je ročno narejen, torej se lahko z časom spreminja. Ta akcija je edina, ki mora vsebovati internetno povezavo, vse ostale akcije delujejo nad obstoječo podatkovno bazo in interneta več ne potrebuje.
+
+![image](https://github.com/damko81/SprVideotekaBE/assets/162964541/09e718f4-1ce0-46f7-b96c-7fea530c40a7)
+
+...itd...
