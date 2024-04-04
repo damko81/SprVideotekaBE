@@ -11,3 +11,7 @@ Neprijavljen uporabnik lahko le gleda seznam naloženih lilmov:
 Ob prijavi z registriranim uporabnikom:
 
 ![image](https://github.com/damko81/SprVideotekaBE/assets/162964541/29015b0e-21cd-482f-82e1-0d8f3b79ba68)
+
+Se odprejo razširjene možnosti videoteke:
+
+![image](https://github.com/damko81/SprVideotekaBE/assets/162964541/93746def-02b0-4979-b1f8-16218c3a996c)
