@@ -9,5 +9,4 @@ public class VideotekaApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(VideotekaApplication.class, args);
 	}
-
 }
