@@ -10,6 +10,7 @@ import tech.damko.videoteka.model.Users;
 import tech.damko.videoteka.repo.UsersRepo;
 import tech.damko.videoteka.response.LoginResponse;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -20,6 +21,11 @@ public class UsersIMPL implements UsersService {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
+
+    @Override
+    public List<Users> findAllUsers() {
+        return usersRepo.findAll();
+    }
 
     @Override
     public String addUsers(UsersDTO usersDTO) {
