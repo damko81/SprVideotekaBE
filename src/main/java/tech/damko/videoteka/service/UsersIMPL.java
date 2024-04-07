@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import tech.damko.videoteka.dto.LoginDTO;
 import tech.damko.videoteka.dto.UsersDTO;
 import tech.damko.videoteka.model.Users;
@@ -61,5 +62,11 @@ public class UsersIMPL implements UsersService {
             return new LoginResponse("Email not exits", false);
         }
 
+    }
+
+    @Transactional
+    @Override
+    public void deleteUsers(Long id) {
+        usersRepo.deleteUsersById(id);
     }
 }

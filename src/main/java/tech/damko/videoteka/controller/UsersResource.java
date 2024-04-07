@@ -14,7 +14,7 @@ import tech.damko.videoteka.service.UsersService;
 
 import java.util.List;
 
-@CrossOrigin
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/users")
 public class UsersResource {
@@ -40,10 +40,16 @@ public class UsersResource {
     }
 
     @PostMapping(path = "/login")
-    public ResponseEntity<?> loginEmployee(@RequestBody LoginDTO loginDTO)
+    public ResponseEntity<?> loginUsers(@RequestBody LoginDTO loginDTO)
     {
         LoginResponse loginResponse = usersService.loginUsers(loginDTO);
         return ResponseEntity.ok(loginResponse);
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<?> deleteUsers(@PathVariable("id") Long id){
+        usersService.deleteUsers(id);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
 }
