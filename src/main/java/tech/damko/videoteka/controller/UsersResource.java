@@ -39,6 +39,12 @@ public class UsersResource {
         return id;
     }
 
+    @PutMapping("/update")
+    public ResponseEntity<Users> updateUsers(@RequestBody Users user){
+        Users updateUser = usersService.updateUsers(user);
+        return new ResponseEntity<>(updateUser,HttpStatus.OK);
+    }
+
     @PostMapping(path = "/login")
     public ResponseEntity<?> loginUsers(@RequestBody LoginDTO loginDTO)
     {

@@ -1,7 +1,6 @@
 package tech.damko.videoteka.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -38,6 +37,11 @@ public class UsersIMPL implements UsersService {
         );
         usersRepo.save(users);
         return users.getName();
+    }
+
+    @Override
+    public Users updateUsers(Users user) {
+        return usersRepo.save(user);
     }
 
     @Override

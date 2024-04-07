@@ -11,6 +11,7 @@ public interface UsersService {
 
     List<Users> findAllUsers();
     String addUsers(UsersDTO employeeDTO);
+    Users updateUsers(Users user);
     LoginResponse loginUsers(LoginDTO loginDTO);
     void deleteUsers(Long id);
 }
