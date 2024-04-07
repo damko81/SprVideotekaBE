@@ -40,8 +40,14 @@ public class UsersIMPL implements UsersService {
     }
 
     @Override
-    public Users updateUsers(Users user) {
-        return usersRepo.save(user);
+    public Users updateUsers(UsersDTO usersDTO) {
+        Users users = new Users(
+                usersDTO.getId(),
+                usersDTO.getName(),
+                usersDTO.getUsername(),
+                usersDTO.getPassword() // Ta je že sedaj šifriran
+        );
+        return usersRepo.save(users);
     }
 
     @Override

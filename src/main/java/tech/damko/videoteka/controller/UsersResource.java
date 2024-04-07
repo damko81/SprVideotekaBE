@@ -40,8 +40,8 @@ public class UsersResource {
     }
 
     @PutMapping("/update")
-    public ResponseEntity<Users> updateUsers(@RequestBody Users user){
-        Users updateUser = usersService.updateUsers(user);
+    public ResponseEntity<Users> updateUsers(@RequestBody UsersDTO usersDTO){
+        Users updateUser = usersService.updateUsers(usersDTO);
         return new ResponseEntity<>(updateUser,HttpStatus.OK);
     }
 
