@@ -41,3 +41,11 @@ Edit:
 
 ![image](https://github.com/damko81/AngularVideotekaFE/assets/162964541/bc240fcc-74fb-450c-8104-5d8edddf6a13)
 
+Popravljanje uporabniškega profila prijavljenega uporabnika:
+
+![image](https://github.com/damko81/SprVideotekaBE/assets/162964541/53350985-757e-4748-b4cc-5f74aea2bdc5)
+
+![image](https://github.com/damko81/SprVideotekaBE/assets/162964541/58759df1-9df9-4c89-a8ad-943582b11c5a)
+
+
+
