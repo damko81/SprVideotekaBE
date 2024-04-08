@@ -44,12 +44,19 @@ public class UsersResource {
         Users updateUser = usersService.updateUsers(usersDTO);
         return new ResponseEntity<>(updateUser,HttpStatus.OK);
     }
+    //Obsolete: Vrača le txt in ne objekta Users
+    @PostMapping(path = "/loginmsg")
+    public ResponseEntity<?> loginUsersMsg(@RequestBody LoginDTO loginDTO)
+    {
+        LoginResponse loginResponse = usersService.loginUsersMsg(loginDTO);
+        return ResponseEntity.ok(loginResponse);
+    }
 
     @PostMapping(path = "/login")
-    public ResponseEntity<?> loginUsers(@RequestBody LoginDTO loginDTO)
+    public ResponseEntity<?> loginUsersRet(@RequestBody LoginDTO loginDTO)
     {
-        LoginResponse loginResponse = usersService.loginUsers(loginDTO);
-        return ResponseEntity.ok(loginResponse);
+        Users user = usersService.loginUsers(loginDTO);
+        return ResponseEntity.ok(user);
     }
 
     @DeleteMapping("/delete/{id}")

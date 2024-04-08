@@ -59,7 +59,7 @@ public class UsersIMPL implements UsersService {
     }
 
     @Override
-    public LoginResponse loginUsers(LoginDTO loginDTO) {
+    public LoginResponse loginUsersMsg(LoginDTO loginDTO) {
         String msg = "";
         Users users = usersRepo.findByUsername(loginDTO.getUsername());
         if (users != null) {
@@ -80,6 +80,22 @@ public class UsersIMPL implements UsersService {
             return new LoginResponse("Email not exits", false);
         }
 
+    }
+
+    @Override
+    public Users loginUsers(LoginDTO loginDTO) {
+        Optional<Users> user = null;
+        Users users = usersRepo.findByUsername(loginDTO.getUsername());
+        if (users != null) {
+            String password = loginDTO.getPassword();
+            String encodedPassword = users.getPassword();
+            Boolean isPwdRight = passwordEncoder.matches(password, encodedPassword);
+            if (isPwdRight) {
+                user = usersRepo.findOneByUsernameAndPassword(loginDTO.getUsername(), encodedPassword);
+            }
+        }
+
+        return user.orElse(null);
     }
 
     @Transactional

@@ -38,6 +38,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public void configure(WebSecurity web) throws Exception {
         web.ignoring().antMatchers("/movie/all");
         web.ignoring().antMatchers("/users/save");
+        web.ignoring().antMatchers("/users/update");
         web.ignoring().antMatchers("/users/login");
         web.ignoring().antMatchers("/movie/add");
         web.ignoring().antMatchers("/movie/update");
