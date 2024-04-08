@@ -41,11 +41,19 @@ public class UsersIMPL implements UsersService {
 
     @Override
     public Users updateUsers(UsersDTO usersDTO) {
+        Users usersTmp = usersRepo.getUserById(usersDTO.getId());
+        String encodedPassword = usersTmp.getPassword();
+        String password = usersDTO.getPassword();
+        if(!encodedPassword.equals(password)){
+            //Encodiramo spremenjeni password
+            password = this.passwordEncoder.encode(password);
+        }
+
         Users users = new Users(
                 usersDTO.getId(),
                 usersDTO.getName(),
                 usersDTO.getUsername(),
-                usersDTO.getPassword() // Ta je že sedaj šifriran
+                password
         );
         return usersRepo.save(users);
     }
