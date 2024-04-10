@@ -6,6 +6,7 @@ import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.stream.Stream;
 
 import org.springframework.core.io.Resource;
@@ -13,6 +14,8 @@ import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Service;
 import org.springframework.util.FileSystemUtils;
 import org.springframework.web.multipart.MultipartFile;
+import tech.damko.videoteka.business.XMLParser;
+import tech.damko.videoteka.model.Movie;
 
 @Service
 public class FilesStorageServiceIMPL implements FilesStorageService {
@@ -82,7 +85,9 @@ public class FilesStorageServiceIMPL implements FilesStorageService {
 
     @Override
     public boolean loadMoviesFromXml(String filename) {
+        XMLParser ps = new XMLParser();
+        ArrayList<Movie> filmiO = ps.readXML(filename);
+        // TODO: Insert distinct movie to database
         return false;
     }
-
 }
