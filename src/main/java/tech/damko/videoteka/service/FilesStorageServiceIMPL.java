@@ -57,6 +57,16 @@ public class FilesStorageServiceIMPL implements FilesStorageService {
     }
 
     @Override
+    public boolean delete(String filename) {
+        try {
+              Path file = root.resolve(filename);
+              return Files.deleteIfExists(file);
+        } catch (IOException e) {
+            throw new RuntimeException("Error: " + e.getMessage());
+        }
+    }
+
+    @Override
     public void deleteAll() {
         FileSystemUtils.deleteRecursively(root.toFile());
     }
