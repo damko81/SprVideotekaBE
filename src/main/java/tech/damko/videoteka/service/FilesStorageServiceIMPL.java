@@ -80,4 +80,9 @@ public class FilesStorageServiceIMPL implements FilesStorageService {
         }
     }
 
+    @Override
+    public boolean loadMoviesFromXml(String filename) {
+        return false;
+    }
+
 }

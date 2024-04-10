@@ -13,4 +13,5 @@ public interface FilesStorageService {
     public boolean delete(String filename);
     public void deleteAll();
     public Stream<Path> loadAll();
+    boolean loadMoviesFromXml(String filename);
 }
