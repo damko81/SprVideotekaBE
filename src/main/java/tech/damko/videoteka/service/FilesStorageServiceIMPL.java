@@ -8,7 +8,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.stream.Stream;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Service;
@@ -17,10 +17,14 @@ import org.springframework.web.multipart.MultipartFile;
 import tech.damko.videoteka.business.XMLParser;
 import tech.damko.videoteka.model.Movie;
 
+
 @Service
 public class FilesStorageServiceIMPL implements FilesStorageService {
 
     private final Path root = Paths.get("uploads");
+
+    @Autowired
+    private MovieService movieService;
 
     @Override
     public void init() {
@@ -85,9 +89,17 @@ public class FilesStorageServiceIMPL implements FilesStorageService {
 
     @Override
     public boolean loadMoviesFromXml(String filename) {
+        boolean isLoaded = false;
         XMLParser ps = new XMLParser();
-        ArrayList<Movie> filmiO = ps.readXML(filename);
-        // TODO: Insert distinct movie to database
-        return false;
+        ArrayList<Movie> movies = ps.readXML(filename);
+        for (Movie movie : movies){
+             Movie m = movieService.findMovieByDiscAndName(movie.getDisc(),movie.getName());
+             if(m == null){
+                 movieService.addMovie(movie);
+                 isLoaded = true;
+             }
+        }
+
+        return isLoaded;
     }
 }

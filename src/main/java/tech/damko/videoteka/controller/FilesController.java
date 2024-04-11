@@ -39,17 +39,18 @@ public class FilesController {
 
     @PostMapping("/loadMoviesFromXml/{filename:.+}")
     public ResponseEntity<ResponseMessage> loadMoviesFromXml(@PathVariable String filename) {
+        String filenameDir = "./uploads/";
         String message = "";
 
         try {
-            boolean existed = storageService.loadMoviesFromXml(filename);
+            boolean isLoaded = storageService.loadMoviesFromXml(filenameDir+filename);
 
-            if (existed) {
+            if (isLoaded) {
                 message = "Movies loaded from file successfully: " + filename;
                 return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessage(message));
             }
-            message = "The file does not exist!";
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ResponseMessage(message));
+            message = "No movies has been necessary loaded";
+            return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessage(message));
         } catch (Exception e) {
             message = "Could not load movies from the file: " + filename + ". Error: " + e.getMessage();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ResponseMessage(message));

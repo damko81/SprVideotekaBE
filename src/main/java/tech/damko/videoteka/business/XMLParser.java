@@ -68,12 +68,7 @@ public class XMLParser {
 
         try
         {
-
             File file = new File(xmlFile);
-            if(!file.exists()) {
-                createNewXmlFile(xmlFile);
-                file = new File(xmlFile);
-            }
 
             DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder documentBuilder = docFactory.newDocumentBuilder();
@@ -113,6 +108,7 @@ public class XMLParser {
                         String duration = "";
                         String releaseDate = "";
                         String url = "";
+                        String imageSrcDec = "";
                         String imageSrc = "";
 
                         int u = 0;
@@ -145,8 +141,8 @@ public class XMLParser {
                             if(childAttrib.equals("url")){
                                 url = nameChild.getAttributes().getNamedItem("url").getNodeValue();
                             }
-                            if(childAttrib.equals("imageSrc")){
-                                imageSrc = nameChild.getAttributes().getNamedItem("imageSrc").getNodeValue();
+                            if(childAttrib.equals("imageSrcDec")){
+                                imageSrc = nameChild.getAttributes().getNamedItem("imageSrcDec").getNodeValue();
                             }
 
                             ++u;
@@ -316,6 +312,12 @@ public class XMLParser {
                 x = doc.createElement("url");
                 attr = doc.createAttribute("url");
                 attr.setValue(f.getUrl());
+                x.setAttributeNode(attr);
+                film.appendChild(x);
+
+                x = doc.createElement("imageSrcDec");
+                attr = doc.createAttribute("imageSrcDec");
+                attr.setValue(f.getImageSrc());
                 x.setAttributeNode(attr);
                 film.appendChild(x);
 

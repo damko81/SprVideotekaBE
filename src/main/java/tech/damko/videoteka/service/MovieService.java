@@ -34,6 +34,10 @@ public class MovieService {
         return movieRepo.save(movie);
     }
 
+    public Movie findMovieByDiscAndName(String disc,String name){
+        return movieRepo.findOneByDiscAndName(disc,name).orElse(null);
+    }
+
     public Movie findMovieById(Long id){
         return movieRepo.findMovieById(id).orElseThrow(() -> new MovieNotFoundException("Movie by id " + id + " was not found."));
     }

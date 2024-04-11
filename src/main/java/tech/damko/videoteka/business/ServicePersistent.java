@@ -5,6 +5,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.Collections;
@@ -631,6 +632,14 @@ public class ServicePersistent {
     public static byte[] decodeStringToByteArray(String imageBytesString){
 
         return Base64.getDecoder().decode(imageBytesString);
+    }
+
+    public static String getDecodedStringByteArray(String imageSrc){
+
+        byte[] decodedImageBytes = decodeStringToByteArray(imageSrc);
+        String decodedImageSrc = new String(decodedImageBytes, StandardCharsets.UTF_8);
+
+        return decodedImageSrc;
     }
 
     public static String getEncodedStringByteArray(String imageSrc){
