@@ -51,6 +51,22 @@ public class FilesStorageServiceIMPL implements FilesStorageService {
     }
 
     @Override
+    public Resource loadFromDownload(String filename) {
+        try {
+            Path file = download.resolve(filename);
+            Resource resource = new UrlResource(file.toUri());
+
+            if (resource.exists() || resource.isReadable()) {
+                return resource;
+            } else {
+                throw new RuntimeException("Could not read the file!");
+            }
+        } catch (MalformedURLException e) {
+            throw new RuntimeException("Error: " + e.getMessage());
+        }
+    }
+
+    @Override
     public Resource load(String filename) {
         try {
               Path file = root.resolve(filename);
@@ -79,6 +95,15 @@ public class FilesStorageServiceIMPL implements FilesStorageService {
     @Override
     public void deleteAll() {
         FileSystemUtils.deleteRecursively(root.toFile());
+    }
+
+    @Override
+    public Stream<Path> loadDownload() {
+        try {
+            return Files.walk(this.download, 1).filter(path -> !path.equals(this.download)).map(this.download::relativize);
+        } catch (IOException e) {
+            throw new RuntimeException("Could not load the files!");
+        }
     }
 
     @Override
