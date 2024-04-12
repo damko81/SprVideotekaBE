@@ -4,6 +4,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import tech.damko.videoteka.model.Movie;
+import tech.damko.videoteka.response.ResponseMessage;
 import tech.damko.videoteka.service.MovieService;
 
 import java.util.List;
@@ -56,8 +57,21 @@ public class MovieResource {
     }
 
     @PostMapping("/load")
-    public ResponseEntity<List<Movie>> loadMovies(@RequestBody String disc){
-        List<Movie> movies = movieService.loadMovies(disc);
-        return new ResponseEntity<>(movies, HttpStatus.OK);
+    public ResponseEntity<ResponseMessage> loadMovies(@RequestBody String disc){
+        String message = "";
+        try {
+            boolean isLoaded = movieService.loadMovies(disc);
+
+            if (isLoaded) {
+                message = "Movies loaded from directori successfully: " + disc;
+                return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessage(message));
+            }
+            message = "No movies has been necessary loaded";
+            return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessage(message));
+        } catch (Exception e) {
+            message = "Could not load movies from the directori: " + disc + ". Error: " + e.getMessage();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ResponseMessage(message));
+        }
+
     }
 }

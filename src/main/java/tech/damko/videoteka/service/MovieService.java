@@ -59,8 +59,8 @@ public class MovieService {
         }
     }
 
-    public List<Movie> loadMovies(String disc){
-
+    public boolean loadMovies(String disc){
+        boolean isLoaded = false;
         ArrayList<Movie> movies = BusinessService.loadMovies(disc);
         for (Movie movie : movies){
 
@@ -78,8 +78,9 @@ public class MovieService {
             }
             if(!movieExists){
                 movieRepo.save(movie);
+                isLoaded = true;
             }
         }
-        return movieRepo.findAll();
+        return isLoaded;
     }
 }
