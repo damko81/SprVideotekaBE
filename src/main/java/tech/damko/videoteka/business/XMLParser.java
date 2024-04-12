@@ -4,6 +4,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import org.w3c.dom.*;
 import org.xml.sax.SAXException;
@@ -177,7 +178,7 @@ public class XMLParser {
         return filmi;
     }
 
-    public void createXML(ArrayList<Movie> filmiObject,String xmlFile,boolean merge){
+    public void createXML(List<Movie> filmiObject, String xmlFile, boolean merge){
 
         try
         {

@@ -37,6 +37,27 @@ public class FilesController {
         }
     }
 
+    @PostMapping("/export")
+    public ResponseEntity<ResponseMessage> export() {
+        String filenameDir = "./download/";
+        String filename = "Filmi.xml";
+        String message = "";
+
+        try {
+            boolean isExported = storageService.export(filenameDir+filename);
+
+            if (isExported) {
+                message = "Movies exported to file successfully: " + filename;
+                return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessage(message));
+            }
+            message = "No movies has been exported";
+            return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessage(message));
+        } catch (Exception e) {
+            message = "Could not export movies to the file: " + filename + ". Error: " + e.getMessage();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ResponseMessage(message));
+        }
+    }
+
     @PostMapping("/loadMoviesFromXml/{filename:.+}")
     public ResponseEntity<ResponseMessage> loadMoviesFromXml(@PathVariable String filename) {
         String filenameDir = "./uploads/";

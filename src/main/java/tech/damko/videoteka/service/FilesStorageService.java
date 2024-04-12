@@ -14,4 +14,5 @@ public interface FilesStorageService {
     public void deleteAll();
     public Stream<Path> loadAll();
     boolean loadMoviesFromXml(String filename);
+    boolean export(String filename);
 }

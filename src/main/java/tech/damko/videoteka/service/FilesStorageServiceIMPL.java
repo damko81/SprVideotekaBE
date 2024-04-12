@@ -7,6 +7,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.Stream;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
@@ -22,6 +23,7 @@ import tech.damko.videoteka.model.Movie;
 public class FilesStorageServiceIMPL implements FilesStorageService {
 
     private final Path root = Paths.get("uploads");
+    private final Path download = Paths.get("download");
 
     @Autowired
     private MovieService movieService;
@@ -30,8 +32,9 @@ public class FilesStorageServiceIMPL implements FilesStorageService {
     public void init() {
         try {
               Files.createDirectories(root);
+              Files.createDirectories(download);
         } catch (IOException e) {
-            throw new RuntimeException("Could not initialize folder for upload!");
+            throw new RuntimeException("Could not initialize folder for upload or download!");
         }
     }
 
@@ -101,5 +104,18 @@ public class FilesStorageServiceIMPL implements FilesStorageService {
         }
 
         return isLoaded;
+    }
+
+    @Override
+    public boolean export(String filename) {
+        boolean isExported = false;
+        XMLParser ps = new XMLParser();
+        List<Movie> movies = movieService.findAllMovies();
+        if(!movies.isEmpty()){
+            ps.createXML(movies,filename,false);
+            isExported = true;
+        }
+
+        return isExported;
     }
 }
