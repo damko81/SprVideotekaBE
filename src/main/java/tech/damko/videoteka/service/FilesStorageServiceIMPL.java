@@ -116,6 +116,15 @@ public class FilesStorageServiceIMPL implements FilesStorageService {
     }
 
     @Override
+    public Stream<Path> loadForLogin(String username) {
+        try {
+            return Files.walk(this.root, 1).filter(path -> !path.equals(this.root) && path.getFileName().toString().contains(username + "_")).map(this.root::relativize);
+        } catch (IOException e) {
+            throw new RuntimeException("Could not load the files!");
+        }
+    }
+
+    @Override
     public boolean loadMoviesFromXml(String filename) {
         boolean isLoaded = false;
         XMLParser ps = new XMLParser();

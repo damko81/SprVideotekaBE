@@ -36,15 +36,22 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(WebSecurity web) throws Exception {
-        web.ignoring().antMatchers("/movie/all");
         web.ignoring().antMatchers("/users/save");
         web.ignoring().antMatchers("/users/update");
         web.ignoring().antMatchers("/users/login");
+        web.ignoring().antMatchers("/movie/all");
         web.ignoring().antMatchers("/movie/add");
         web.ignoring().antMatchers("/movie/update");
         web.ignoring().antMatchers("/movie/load");
         web.ignoring().antMatchers("/movie/delete/{id}");
         web.ignoring().antMatchers("/movie/deleteMovieByDisc/{disc}");
+        web.ignoring().antMatchers("/file/upload");
+        web.ignoring().antMatchers("/file/export");
+        web.ignoring().antMatchers("/file/files");
+        web.ignoring().antMatchers("/file/downloadfiles");
+        web.ignoring().antMatchers("/file/delete/{filename:.+}");
+        web.ignoring().antMatchers("/file/filesForLogin/{username:.+}");
+        web.ignoring().antMatchers("/file/loadMoviesFromXml/{filename:.+}");
     }
 
     @Bean
