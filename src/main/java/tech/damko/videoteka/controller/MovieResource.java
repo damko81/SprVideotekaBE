@@ -52,7 +52,7 @@ public class MovieResource {
 
     @DeleteMapping("/deleteMovieByDisc/{disc}")
     public ResponseEntity<?> deleteMovieByDisc(@PathVariable("disc") String disc){
-        movieService.deleteMovieByDisc(disc);
+        movieService.deleteMovieByDisc(disc + "\\");
         return new ResponseEntity<>(HttpStatus.OK);
     }
 

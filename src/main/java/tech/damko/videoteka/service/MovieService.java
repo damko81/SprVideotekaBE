@@ -50,7 +50,7 @@ public class MovieService {
     @Transactional
     public void deleteMovieByDisc(String disc){
 
-        Optional<List<Movie>> moviesByDisc = movieRepo.findMovieByDisc(disc+'\\');
+        Optional<List<Movie>> moviesByDisc = movieRepo.findMovieByDisc(disc);
         Stream<Movie> stream = moviesByDisc.map(List::stream).orElse(Stream.empty());
         Iterator<Movie> it = stream.iterator();
         while (it.hasNext()) {
