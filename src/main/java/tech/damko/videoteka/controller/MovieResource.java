@@ -52,15 +52,17 @@ public class MovieResource {
 
     @DeleteMapping("/deleteMovieByDisc/{disc}")
     public ResponseEntity<?> deleteMovieByDisc(@PathVariable("disc") String disc){
-        movieService.deleteMovieByDisc(disc + "\\");
+        String discTmp = disc.replace("!", "\\");
+        movieService.deleteMovieByDisc(discTmp);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @PostMapping("/load")
     public ResponseEntity<ResponseMessage> loadMovies(@RequestBody String disc){
+        String discTmp = disc.replace("!", "\\");
         String message = "";
         try {
-            boolean isLoaded = movieService.loadMovies(disc);
+            boolean isLoaded = movieService.loadMovies(discTmp);
 
             if (isLoaded) {
                 message = "Movies loaded from directori successfully: " + disc;
