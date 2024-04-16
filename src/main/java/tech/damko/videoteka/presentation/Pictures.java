@@ -32,7 +32,7 @@ public class Pictures {
         try {
             ImageIcon ii = new ImageIcon(im);
             bi = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
-            Graphics2D g2d = (Graphics2D) bi.createGraphics();
+            Graphics2D g2d = bi.createGraphics();
             g2d.addRenderingHints(new RenderingHints(RenderingHints.KEY_RENDERING,RenderingHints.VALUE_RENDER_QUALITY));
             g2d.drawImage(ii.getImage(), 0, 0, WIDTH, HEIGHT, null);
         } catch (Exception e) {
