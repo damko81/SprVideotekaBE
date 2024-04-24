@@ -7,7 +7,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import tech.damko.videoteka.bean.AuthenticationBean;
 
-@CrossOrigin(origins = "http://localhost:4200")
+//@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins= {"*"}, maxAge = 4800, allowCredentials = "false")
 @RestController
 @RequestMapping("/movie")
 public class BasicAuthController {

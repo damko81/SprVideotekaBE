@@ -16,7 +16,8 @@ import tech.damko.videoteka.model.FileInfo;
 import tech.damko.videoteka.response.ResponseMessage;
 import tech.damko.videoteka.service.FilesStorageService;
 
-@CrossOrigin(origins = "http://localhost:4200")
+//@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins= {"*"}, maxAge = 4800, allowCredentials = "false" )
 @RestController
 @RequestMapping("/file")
 public class FilesController {
