@@ -43,6 +43,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         web.ignoring().antMatchers("/movie/add");
         web.ignoring().antMatchers("/movie/update");
         web.ignoring().antMatchers("/movie/load");
+        web.ignoring().antMatchers("/movie/mobileLoad/{disc}");
         web.ignoring().antMatchers("/movie/delete/{id}");
         web.ignoring().antMatchers("/movie/deleteMovieByDisc/{disc}");
         web.ignoring().antMatchers("/file/upload");

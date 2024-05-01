@@ -58,6 +58,25 @@ public class MovieResource {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    @PostMapping("/mobileLoad/{disc}")
+    public ResponseEntity<ResponseMessage> mobileLoadMovies(@PathVariable("disc") String disc){
+        String discTmp = disc.replace("!", "\\");
+        String message = "";
+        try {
+            boolean isLoaded = movieService.loadMovies(discTmp);
+
+            if (isLoaded) {
+                message = "Movies loaded from directori successfully: " + disc;
+                return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessage(message));
+            }
+            message = "No movies has been necessary loaded";
+            return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessage(message));
+        } catch (Exception e) {
+            message = "Could not load movies from the directori: " + disc + ". Error: " + e.getMessage();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ResponseMessage(message));
+        }
+    }
+
     @PostMapping("/load")
     public ResponseEntity<ResponseMessage> loadMovies(@RequestBody String disc){
         String discTmp = disc.replace("!", "\\");
